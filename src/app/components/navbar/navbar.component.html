@@ -1,0 +1,56 @@
+<nav id="navbar-main" class="navbar navbar-horizontal navbar-expand-lg navbar-dark bg-default" style="padding: 0px;">
+    <div class="container">
+        <a routerLink="/" style="font-family: 'dillova';color: #ffffff;font-size: 1.5rem;">
+            Stack-Hack
+        </a>
+        <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbar-default"
+            aria-controls="navbar-default" aria-expanded="false" aria-label="Toggle navigation">
+            <span class="navbar-toggler-icon"></span>
+        </button>
+        <div class="navbar-collapse collapse" id="navbar_global">
+            <div class="navbar-collapse-header">
+                <div class="row">
+                    <div class="col-6 collapse-brand">
+                        <a [routerLink]="['/home']" style="font-family: 'dillova'"> Stack-Hack V1 </a>
+                    </div>
+                    <div class="col-6 collapse-close">
+                        <button type="button" class="navbar-toggler" (click)="isCollapsed = !isCollapsed"
+                            [attr.aria-expanded]="!isCollapsed" aria-controls="navbar_global">
+                            <span></span>
+                            <span></span>
+                        </button>
+                    </div>
+                </div>
+            </div>
+            <ul class="navbar-nav align-items-lg-center ml-lg-auto" *ngIf="!isLoggedIn">
+                <li class="nav-item">
+                    <a class="nav-link nav-link-icon" routerLink="/login" data-toggle="tooltip" title="Admin Login">
+                        <i class="ni ni-single-02"></i>
+                        <span class="nav-link-inner--text d-lg-none"></span>
+                    </a>
+                </li>
+            </ul>
+            <ul class="navbar-nav align-items-lg-center ml-lg-auto" *ngIf="isLoggedIn">
+                <li class="nav-item">
+                    <a class="nav-link nav-link-icon" routerLink="/event/dashboard" data-toggle="tooltip" title="Logout">
+                        Dashboard
+                        <span class="nav-link-inner--text d-lg-none"></span>
+                    </a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link nav-link-icon" routerLink="/event/view" data-toggle="tooltip" title="Logout">
+                        Events
+                        <span class="nav-link-inner--text d-lg-none"></span>
+                    </a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link nav-link-icon" routerLink="./" data-toggle="tooltip" title="Logout"
+                        (click)="onLogout()">
+                        <i class="fa fa-sign-out"></i>
+                        <span class="nav-link-inner--text d-lg-none"></span>
+                    </a>
+                </li>
+            </ul>
+        </div>
+    </div>
+</nav>

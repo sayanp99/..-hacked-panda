@@ -1,0 +1,91 @@
+<app-navbar></app-navbar>
+<section class="bg-secondary" style="height: 100%;">
+  <div class="container py-lg-md">
+    <div class="card shadow">
+      <div class="table-responsive">
+        <table class="table align-items-center table-flush">
+          <thead class="thead-light">
+            <tr>
+              <th scope="col">Event type</th>
+              <th scope="col">Reg. No</th>
+              <th scope="col">Name</th>
+              <th scope="col">Email</th>
+              <th scope="col">Phone</th>
+              <th scope="col">Tickets</th>
+              <th scope="col">Id card</th>
+              <th scope="col">Action</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr *ngFor="let item of eventsData">
+              <th scope="row"> {{item.type}} </th>
+              <td> {{item.regNumber}} </td>
+              <td> {{item.name}} </td>
+              <td> {{item.email}} </td>
+              <td> {{item.mobile}} </td>
+              <td> {{item.tickets}} </td>
+              <td>
+                <img alt="Id card placeholder" class="id-card" [src]="'http://localhost:3000/'+item.idCard"
+                  (click)="open(image,'','','http://localhost:3000/'+item.idCard);">
+              </td>
+
+              <td *ngIf="item.accepted=='false' ;else elseAccept">
+                <button type="button" class="btn btn-success btn-sm" (click)="onRespond(item._id,true)">Accept</button>
+                <button type="button" class="btn btn-warning btn-sm" (click)="onRespond(item._id,false)">Reject</button>
+              </td>
+              <ng-template #elseAccept>
+                <td *ngIf="item.accepted=='accepted'">
+                  <span class="badge badge-pill badge-success">ACCEPTED</span>
+                  <button *ngIf="item.accepted=='accepted'" type="button" class="btn btn-warning btn-sm"  style="margin-left: 10px;"
+                    (click)="onRespond(item._id,false)">Reject</button>
+                </td>
+                <td *ngIf="item.accepted=='rejected'">
+                  <span class="badge badge-pill badge-danger">REJECTED</span>
+                  <button *ngIf="item.accepted=='rejected'" type="button" class="btn btn-success btn-sm"  style="margin-left: 10px;"
+                    (click)="onRespond(item._id,true)">Accept</button>
+                </td>
+              </ng-template>
+            </tr>
+          </tbody>
+        </table>
+        <div class="card-footer py-4">
+          <nav aria-label="Page navigation example">
+            <ul class="pagination justify-content-end">
+              <li class="page-item">
+                <a class="page-link" href="javascript:void(0)" (click)="onPageChange('prev')">
+                  <i class="fa fa-angle-left"></i>
+                  <span class="sr-only">Previous</span>
+                </a>
+              </li>
+              <li class="page-item" [ngClass]="{'active' : page==i}" *ngFor="let i of totalPages">
+                <a class="page-link" href="javascript:void(0)" (click)="onPageChange(i)">
+                  {{i}}
+                </a>
+              </li>
+              <li class="page-item">
+                <a class="page-link" href="javascript:void(0)" (click)="onPageChange('next')">
+                  <i class="fa fa-angle-right"></i>
+                  <span class="sr-only">Next</span>
+                </a>
+              </li>
+            </ul>
+          </nav>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+
+<div class="col-md-4">
+  <ng-template #image let-c="close" let-d="dismiss">
+    <div class="modal-content">
+      <div class="modal-body">
+        <button type="button" class="close" data-dismiss="modal" aria-label="Close" (click)="d('Cross click')">
+          <span aria-hidden="true">×</span>
+        </button>
+        <img class="idCard" [src]="viewImage">
+      </div>
+    </div>
+  </ng-template>
+</div>

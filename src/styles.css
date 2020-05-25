@@ -1,0 +1,13 @@
+/* You can add global styles to this file, and also import other style files */
+@font-face {
+  font-family: dillova;
+  src: url(assets/fonts/Dillova.ttf) format("truetype");
+}
+
+body {
+  background-color: #d4e0a8 !important;
+}
+
+.logo-font {
+  font-family: dillova;
+}
